@@ -1,0 +1,42 @@
+{% extends 'blog_app/base.html' %}
+  {% block content %}<br>
+    <h3 class='posttitle'>{{ post.title }}</h3>
+    {% if post.published_date %}
+      <div class="date postdate">
+        <i class="fas fa-clock"></i>&ensp;{{ post.published_date }}
+      </div>
+    {% else %}
+      <a class='btn btn-outline-warning' href="{% url 'post_publish' pk=post.pk %}">Publish</a>
+    {% endif %}
+
+    <p class='postcontent'>{{ post.text | safe | linebreaksbr }}</p>
+
+    {% if user.is_authenticated %}
+        <a class='btn btn-outline-warning' href="{% url 'post_edit' pk=post.pk %}"><span><i class="fas fa-pencil"></i></span></a>&emsp;
+        <a class='btn btn-outline-danger' href="{% url 'post_remove' pk=post.pk %}"><span><i class="fas fa-trash-alt"></i></span></a>
+    {% endif %}
+
+    <hr>
+    <div class="container">
+      <p style='color: red'><strong>Comments : {{ post.comments.count }}</strong>
+        <a class='btn-comment btn btn-primary' href="{% url 'add_comment_to_post' pk=post.pk %}">Add Comment</a></p>
+
+    </div>
+
+    <div class="container">
+      {% for comment in post.comments.all %}
+      <br>
+        {% if user.is_authenticated or comment.approved_comment %}
+          {{ comment.created_date }}
+          {% if not comment.approved_comment %}&emsp;
+            <a class='btn btn-outline-danger' href="{% url 'comment_remove' pk=comment.pk %}"><span><i class="fas fa-trash-alt"></i></span></a>&ensp;
+            <a class='btn btn-outline-success' href="{% url 'comment_approve' pk=comment.pk %}"><span><i class="fas fa-check"></i></span></a>
+          {% endif %}
+          <p>{{ comment.text|safe|linebreaks }}</p>
+          <p>Posted By : {{ comment.author }}</p>
+        {% endif %}
+        {% empty %}
+        <p>No Comments....</p>
+    {% endfor %}
+    </div>
+  {% endblock %}

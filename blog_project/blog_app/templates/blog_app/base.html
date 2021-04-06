@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title></title>
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+    <!-- medium style editor -->
+    <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+  </head>
+  <body>
+    <nav class='navbar navbar-expand-md bg-dark sticky-top'>
+      <div class="container">
+        <a class='navbar-brand' href="{% url 'post_list' %}"><strong>BLOG</strong></a>
+        <ul class='navbar-nav me-auto'>
+          <li class='nav-item'><a class='nav-link' href="{% url 'about' %}">About&ensp;</a></li>
+          <li class='nav-item'><a class='nav-link' href="https://github.com/Abhaderiya"><i class="fab fa-github fa-lg">&ensp;</i></a></li>
+          <li class='nav-item'><a class='nav-link' href="https://www.linkedin.com/in/akshay-bhaderiya-122990b6/"><i class="fab fa-linkedin-in fa-lg"></i></a></li>
+        </ul>
+        <ul class='navbar-nav navbar-right'>
+          {% if user.is_authenticated %}
+            <li class='nav-item'><a class='nav-link' href="{% url 'post_new' %}">New Post</a></li>
+            <li class='nav-item'><a class='nav-link' href="{% url 'post_draft_list' %}">Drafts</a></li>
+            <li class='nav-item'><a class='nav-link' href="{% url 'logout' %}">Logout</a></li>
+            <li class='nav-item'><a class='nav-link' style='color:white'>Welcome: {{ user.username }}</a></li>
+          {% else %}
+            <li class='nav-item'><a class='nav-link' href="{% url 'login' %}">Login</a></li>
+          {% endif %}
+
+        </ul>
+      </div>
+    </nav>
+
+    <div class="content container">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="blog_posts">
+            {% block content %}
+            {% endblock %}
+          </div>
+
+        </div>
+
+      </div>
+
+    </div><br>
+    <div class="footer">
+      <!-- add 'footer' snippet in css -->
+      <div class="footer-v1 bg-img">
+      	<div class="footer no-margin">
+      		<div class="container">
+      			<div class="row">
+              <hr>
+
+              <div class="container">
+
+                <address>
+                  <ul class="list-unstyled link-list">
+                    <li>&copy; Akshay Bhaderiya &ensp;{% now "Y" %}&emsp;
+                      <a href="#">Contact Us</a>&emsp;
+                      <a href="{% url 'post_list' %}">Blog</a>&emsp;
+                      <a href="{% url 'about' %}">About Us</a></li>
+                  </ul>
+                </address>
+              </div>
+
+
+
+
+              </div>
+
+      			</div>
+      		</div>
+      	</div>
+      </div>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,14 @@
+{% extends 'blog_app/base.html' %}
+{% load bootstrap4 %}
+  {% block content %}<br>
+    <h3>New Post : </h3><br>
+    <form class="post-form" method="POST">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+
+      <br><button type="submit" class='save btn btn-outline-primary col-2'>Save</button>
+    </form>
+
+    <script>var editor =  new MediumEditor('.editable');</script>
+
+  {% endblock %}

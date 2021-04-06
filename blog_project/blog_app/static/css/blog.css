@@ -1,0 +1,44 @@
+.centerstage{
+  margin: auto;
+}
+
+.postdate{
+  text-align: center;
+}
+
+.posttitle{
+  font-size: 3em;
+  text-align: center;
+}
+
+.postcontent{
+  font-size: 1.5em;
+}
+
+body{
+  background-color: #282C2F;
+  color: white;
+  min-height: 300px;
+   margin-bottom: 200px;
+   clear: both;
+}
+
+.btn-comment{
+  position: absolute;
+  right: 540px;
+}
+
+a{
+  text-decoration: none;
+}
+
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   background-color: #282C2F;
+   height: 8%;
+   width: 100%;
+   color: white;
+   text-align: center;
+}
